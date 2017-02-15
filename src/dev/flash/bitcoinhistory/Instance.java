@@ -5,7 +5,6 @@ import dev.flash.bitcoinhistory.input.MouseManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 
 /**
  * Created by Flash on 15/02/2017.
@@ -61,6 +60,7 @@ public class Instance implements Runnable {
         //camera = new Camera(handler, 0, 0);
 
         nodeManager = new NodeManager();
+        NodeLoader.readNodes("res/files/file.txt");
     }
 
     private void tick(double delta) {
