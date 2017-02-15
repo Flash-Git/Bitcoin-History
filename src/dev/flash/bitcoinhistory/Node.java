@@ -5,27 +5,31 @@ package dev.flash.bitcoinhistory;
  */
 
 public class Node {
-    private boolean buy;
-    private float pounds;
-    private float bits;
-
-    public Node(boolean buy, float pounds, float bits) {
-        this.buy = buy;
-        this.pounds = pounds;
-        this.bits = bits;
-    }
-
-    //Getters and Setters
-
-    public boolean isBuy() {
-        return buy;
-    }
-
-    public float getPounds() {
-        return pounds;
-    }
-
-    public float getBits() {
-        return bits;
-    }
+	private boolean buy;
+	private float pounds;
+	private float bits;
+	
+	public Node(boolean buy, float pounds, float bits) {
+		this.buy = buy;
+		this.pounds = pounds;
+		this.bits = bits;
+	}
+	
+	//Getters and Setters
+	
+	public boolean isBuy() {
+		return buy;
+	}
+	
+	public float getPounds() {
+		return pounds;
+	}
+	
+	public float getBits() {
+		return bits;
+	}
+	
+	public float getRatio() {
+		return pounds / bits * 1000;
+	}
 }

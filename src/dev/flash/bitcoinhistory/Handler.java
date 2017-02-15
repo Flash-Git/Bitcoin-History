@@ -5,9 +5,13 @@ package dev.flash.bitcoinhistory;
  */
 
 public class Handler {
-	public static Instance instance;
+	public Instance instance;
 	
 	public Handler(Instance instance) {
 		this.instance = instance;
+	}
+	
+	public int getHeight(){
+		return instance.getHeight();
 	}
 }
