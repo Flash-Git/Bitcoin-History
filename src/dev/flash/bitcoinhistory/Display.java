@@ -1,9 +1,7 @@
 package dev.flash.bitcoinhistory;
 
-import java.awt.Canvas;
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Flash on 15/02/2017.
@@ -17,7 +15,7 @@ public class Display {
     private String title;
     private int width, height;
 
-    public Display(String title, int width, int height){
+    public Display(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -44,12 +42,12 @@ public class Display {
         frame.pack();
     }
 
-    public Canvas getCanvas(){
+    public Canvas getCanvas() {
         return canvas;
 
     }
 
-    public JFrame getFrame(){
+    public JFrame getFrame() {
         return frame;
     }
 }

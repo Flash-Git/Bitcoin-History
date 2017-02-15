@@ -7,7 +7,7 @@ package dev.flash.bitcoinhistory;
 public class Handler {
     private Instance instance;
 
-    public Handler (Instance instance){
+    public Handler(Instance instance) {
         this.instance = instance;
     }
 }

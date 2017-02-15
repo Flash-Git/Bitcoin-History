@@ -5,28 +5,27 @@ import dev.flash.bitcoinhistory.input.MouseManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 /**
  * Created by Flash on 15/02/2017.
  */
 
-public class Instance implements Runnable{
+public class Instance implements Runnable {
     //display handles JFrame
     private Display display;
     private BufferStrategy bs;
     private Graphics g;
 
-    //used for fps counter
-    private int fps;
-
-    //total number of ticks
+    //Total ticks
     public static int tickCount;
 
-    //game variables
+    //Instance variables
     private int width, height;
     private String title;
     private boolean running;
     private Thread thread;
+    private int fps;
 
     //Input
     private KeyManager keyManager;
@@ -35,7 +34,9 @@ public class Instance implements Runnable{
     //Handler
     private Handler handler;
 
-    public Instance(String title, int width, int height){
+    private NodeManager nodeManager;
+
+    public Instance(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -43,7 +44,7 @@ public class Instance implements Runnable{
         mouseManager = new MouseManager();
     }
 
-    private void init(){
+    private void init() {
         handler = new Handler(this);
 
         //Create window
@@ -58,16 +59,19 @@ public class Instance implements Runnable{
         //Assets.init();
 
         //camera = new Camera(handler, 0, 0);
+
+        nodeManager = new NodeManager();
     }
 
-    private void tick(double delta){
+    private void tick(double delta) {
         keyManager.updateKeys();//TODO this is more of a failsafe than actually necessary
+        nodeManager.tick();
     }
 
-    private void render(){
+    private void render() {
         //Draw frames before displaying them
         bs = display.getCanvas().getBufferStrategy();
-        if(bs == null){
+        if(bs == null) {
             display.getCanvas().createBufferStrategy(2);//amount of stored up frames ready before pushing to screen
             return;
         }
@@ -77,7 +81,7 @@ public class Instance implements Runnable{
         g.clearRect(0, 0, width, height);
 
         //Draw Here
-
+        nodeManager.render(g);
 
         //End Draw
         bs.show();
@@ -85,32 +89,33 @@ public class Instance implements Runnable{
     }
 
     @Override
-    public void run(){
+    public void run() {
         init();
         int targetFps = 144;
-        double timePerTick = 1000000000/targetFps;
+        double timePerTick = 1000000000 / targetFps;
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();
         long timer = 0;
         int ticks = 0;
         long deltaTime;//better to have this be a long that converts to int or pass a long into tick()?
-        long deltaLastTime = System.nanoTime();;
+        long deltaLastTime = System.nanoTime();
+        ;
         long deltaNow;
 
 
-        while(running){
+        while(running) {
             now = System.nanoTime();
-            timer += now-lastTime;
-            delta += (now - lastTime)/timePerTick;
+            timer += now - lastTime;
+            delta += (now - lastTime) / timePerTick;
 
             lastTime = now;
 
-            if(delta>=1){//this should avoid lost or gained frames from speeding up or slowing down the game
+            if(delta >= 1) {//this should avoid lost or gained frames from speeding up or slowing down the game
                 deltaNow = System.nanoTime();
-                deltaTime = deltaNow-deltaLastTime;
+                deltaTime = deltaNow - deltaLastTime;
 
-                tick(deltaTime/1000000);//converts nano to milli
+                tick(deltaTime / 1000000);//converts nano to milli
                 render();
                 ticks++;
                 delta--;
@@ -118,7 +123,7 @@ public class Instance implements Runnable{
                 deltaLastTime = deltaNow;
             }
 
-            if(timer>=1000000000){
+            if(timer >= 1000000000) {
                 System.out.println("Ticks and Frames: " + ticks);
                 fps = ticks;
                 ticks = 0;
@@ -129,8 +134,8 @@ public class Instance implements Runnable{
     }
 
     //Creates the thread
-    public synchronized void start(){
-        if(running==true){
+    public synchronized void start() {
+        if(running == true) {
             return;
         }
         running = true;
@@ -139,29 +144,29 @@ public class Instance implements Runnable{
     }
 
     //Stops the code cleanly
-    public synchronized void stop(){
-        if(!running){
+    public synchronized void stop() {
+        if(! running) {
             return;
         }
         running = false;
         try {
             thread.join();
-        } catch (InterruptedException e) {
+        } catch(InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     //Getters and Setters
 
-    public int getFPS(){
+    public int getFPS() {
         return fps;
     }
 
-    public KeyManager getKeyManager(){
+    public KeyManager getKeyManager() {
         return keyManager;
     }
 
-    public MouseManager getMouseManager(){
+    public MouseManager getMouseManager() {
         return mouseManager;
     }
 
@@ -173,11 +178,11 @@ public class Instance implements Runnable{
         this.height = height;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return height;
     }
 }

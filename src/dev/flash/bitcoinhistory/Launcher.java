@@ -5,7 +5,7 @@ package dev.flash.bitcoinhistory;
  */
 
 public class Launcher {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Instance instance = new Instance("Bitcoin History", 1100, 600);
         instance.start();
     }
