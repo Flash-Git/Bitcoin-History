@@ -30,6 +30,7 @@ public class Node {
 	}
 	
 	public float getRatio() {
-		return pounds / bits * 1000;
+		float ratio = (int) (pounds / bits * 100000);
+		return ratio/100;
 	}
 }

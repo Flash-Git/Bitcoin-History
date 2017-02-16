@@ -79,7 +79,7 @@ public class Instance implements Runnable {
 		
 		//Clear Screen
 		g.clearRect(0, 0, width, height);
-		g.setColor(Color.BLACK);
+		g.setColor(new Color(20, 20, 20));
 		g.fillRect(0, 0, width, height);
 		g.setColor(Color.WHITE);
 		//Draw Here

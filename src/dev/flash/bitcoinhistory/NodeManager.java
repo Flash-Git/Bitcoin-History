@@ -34,20 +34,21 @@ public class NodeManager {
 	public void render(Graphics g) {
 		int x = 0;
 		
-		int lines = 15;
+		int lines = 25;
 		
-		int low = 600;
-		int high = 900;
+		int low = 700;
+		int high = 870;
 		int spread = high - low;
 		
 		int lowP = 15;
 		int highP = handler.getHeight() - 30;
 		int spreadP = highP - lowP;
 		
-		g.drawLine(15, lowP, 15, highP);
+		g.drawLine(15, highP, 15, lowP);
 		
-		for(int i = 0; i < lines + 1; i++) {
+		for(int i = 0; i < lines+1; i++) {
 			g.drawString(handler.getHeight() / spreadP * spread - (spread / (lines) * i) + low + "", 16, spreadP / (lines) * i + lowP + 5);
+			//g.drawString("fu", 15, spread / spreadP * (i * lines) + highP);
 			g.drawLine(13, (highP - lowP) / (lines) * i + lowP, 17, (highP - lowP) / (lines) * i + lowP);
 		}
 		
@@ -57,10 +58,14 @@ public class NodeManager {
 			} else {
 				g.setColor(Color.RED);
 			}
-			x += 75;
-			int y = (int) (spreadP + lowP - (handler.getHeight() * - spreadP / spread + (node.getRatio() * spreadP / spread)));
+			x += 50;
+			//int y = (int) (spreadP + lowP - (handler.getHeight() * - spreadP / spread + (node.getRatio() * spreadP / spread)));
+			
+			int y = (high - (int) node.getRatio())*spreadP/spread+lowP;
+			System.out.println(y);
+			
 			g.drawRect(x + 30, y, 2, 2);
-			g.drawString(node.getRatio() + "", x - 15, y - 5);
+			g.drawString(node.getRatio() + "", x + 13, y - 5);
 			g.drawString(node.getBits() + "", x + 15, y + 17);
 		}
 	}
