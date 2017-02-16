@@ -1,19 +1,24 @@
 package dev.flash.bitcoinhistory.input;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
-public class MouseManager implements MouseListener, MouseMotionListener {
+public class MouseManager implements MouseListener, MouseMotionListener, MouseWheelListener {
 
     private boolean leftPressed, rightPressed;
     private int mouseX, mouseY;
-
+    private boolean mouseWheelUp, mouseWheelDown;
+	private float wheelRotation;
+	
     public MouseManager() {
     }
 
     // Implemented methods
-
+	
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		wheelRotation += e.getWheelRotation();
+	}
+	
     @Override
     public void mousePressed(MouseEvent e) {
         mouseMoved(e);
@@ -82,4 +87,20 @@ public class MouseManager implements MouseListener, MouseMotionListener {
     public int getMouseY() {
         return mouseY;
     }
+	
+	public boolean isMouseWheelUp() {
+		return mouseWheelUp;
+	}
+	
+	public boolean isMouseWheelDown() {
+		return mouseWheelDown;
+	}
+	
+	public float getWheelRotation() {
+		return wheelRotation;
+	}
+	
+	public void setWheelRotation(float wheelRotation) {
+		this.wheelRotation = wheelRotation;
+	}
 }

@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class NodeManager {
 	private Handler handler;
 	private ArrayList<Node> nodes = new ArrayList<>();
+	private Camera camera;
 	
 	public NodeManager(Handler handler) {
 		this.handler = handler;
+		this.camera = handler.getCamera();
 	}
 	
 	public void addNode(Node newNode) {
@@ -36,8 +38,8 @@ public class NodeManager {
 		
 		int lines = 25;
 		
-		int low = 700;
-		int high = 870;
+		int low = (int)camera.getLow();
+		int high = (int)camera.getHigh();
 		int spread = high - low;
 		
 		int lowP = 15;
@@ -62,7 +64,6 @@ public class NodeManager {
 			//int y = (int) (spreadP + lowP - (handler.getHeight() * - spreadP / spread + (node.getRatio() * spreadP / spread)));
 			
 			int y = (high - (int) node.getRatio())*spreadP/spread+lowP;
-			System.out.println(y);
 			
 			g.drawRect(x + 30, y, 2, 2);
 			g.drawString(node.getRatio() + "", x + 13, y - 5);

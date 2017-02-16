@@ -6,6 +6,7 @@ package dev.flash.bitcoinhistory;
 
 public class Handler {
 	public Instance instance;
+	public Camera camera;
 	
 	public Handler(Instance instance) {
 		this.instance = instance;
@@ -13,5 +14,13 @@ public class Handler {
 	
 	public int getHeight(){
 		return instance.getHeight();
+	}
+	
+	public Camera getCamera() {
+		return camera;
+	}
+	
+	public void setCamera(Camera camera) {
+		this.camera = camera;
 	}
 }

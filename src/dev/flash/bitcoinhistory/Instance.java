@@ -34,6 +34,7 @@ public class Instance implements Runnable {
 	private Handler handler;
 	
 	private NodeManager nodeManager;
+	private Camera camera;
 	
 	public Instance(String title, int width, int height) {
 		this.title = title;
@@ -50,14 +51,16 @@ public class Instance implements Runnable {
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		display.getFrame().addMouseListener(mouseManager);
+		display.getFrame().addMouseWheelListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
 		display.getCanvas().addMouseListener(mouseManager);
+		display.getCanvas().addMouseWheelListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		
 		//Load the game's assets
 		//Assets.init();
 		
-		//camera = new Camera(handler, 0, 0);
+		handler.setCamera(camera = new Camera(0, 700, 600, 870));
 		
 		nodeManager = new NodeManager(handler);
 		nodeManager.setNodes(NodeLoader.readNodes("res/files/file.txt"));
@@ -66,6 +69,10 @@ public class Instance implements Runnable {
 	private void tick(double delta) {
 		keyManager.updateKeys();//TODO this is more of a failsafe than actually necessary
 		nodeManager.tick();
+		
+		int scrollAmount = (int) mouseManager.getWheelRotation();
+		camera.setHigh(camera.getHigh()+scrollAmount);
+		mouseManager.setWheelRotation(0);
 	}
 	
 	private void render() {
