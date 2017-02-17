@@ -70,30 +70,19 @@ public class Instance implements Runnable {
 		keyManager.updateKeys();//TODO this is more of a failsafe than actually necessary
 		nodeManager.tick();
 		
-		int scrollAmount = (int) mouseManager.getWheelRotation();
-		try{
-			if(mouseManager.getWheelRotation()==0){
-				return;
-			}
-			float mouseY = mouseManager.getMouseY();
-			float height = handler.getHeight();
-			
-			float convertedMouseY = mouseY/height;
-			System.out.println(convertedMouseY);
-			camera.setHigh(camera.getHigh()+10*convertedMouseY*scrollAmount);
-			camera.setLow(camera.getLow()-10*(1-convertedMouseY)*scrollAmount);
-			
-			
-			
-			//float newY = handler.getHeight() / nodeManager.getSpreadP() * nodeManager.getSpread() - (nodeManager.getSpread() / mouseManager.getMouseY()) + 15;
-			//camera.setHigh(camera.getHigh()+newY*scrollAmount);
-			//camera.setLow(camera.getLow()-newY*scrollAmount);
-			mouseManager.setWheelRotation(0);
-			//camera.setHigh(camera.getHigh()+newY*scrollAmount+nodeManager.getSpread()/2);
-			//camera.setLow(camera.getLow()-newY*scrollAmount-nodeManager.getSpread()/2);
-		}catch(Exception e){
-			
-		}
+		int scrollAmount;
+		
+		if((scrollAmount = (int) mouseManager.getWheelRotation()) ==0)
+			return;
+		
+		float mouseY = mouseManager.getMouseY();
+		float height = handler.getHeight();
+		float convertedMouseY = mouseY/height;
+		
+		camera.setHigh(camera.getHigh()+10*convertedMouseY*scrollAmount);
+		camera.setLow(camera.getLow()-10*(1-convertedMouseY)*scrollAmount);
+		
+		mouseManager.setWheelRotation(0);
 	}
 	
 	private void render() {
