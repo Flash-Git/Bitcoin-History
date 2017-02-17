@@ -11,7 +11,6 @@ public class NodeManager {
 	private Handler handler;
 	private ArrayList<Node> nodes = new ArrayList<>();
 	private Camera camera;
-	private int spread, spreadP;
 	
 	public NodeManager(Handler handler) {
 		this.handler = handler;
@@ -39,26 +38,30 @@ public class NodeManager {
 		
 		int lines = 25;
 		
-		int low = (int) camera.getLow();
-		int high = (int) camera.getHigh();
-		spread = high - low;
+		float low = camera.getLow();
+		float high = camera.getHigh();
+		float spread = high - low;
 		
 		int lowP = 15;
 		int highP = handler.getHeight() - 30;
-		spreadP = highP - lowP;
+		float spreadP = highP - lowP;
 		
 		g.drawLine(15, lowP, 15, highP);
 		
 		for(int i = 0; i < lines + 1; i++) {
-			int pY = i * handler.getHeight() / lines;//Pixel Coords height -> 0
+			float pY = i * handler.getHeight() / lines;//Pixel Coords height -> 0
 			
-			int nY = handler.getHeight() - pY;//Node Coords 0 -> heights
+			float nY = handler.getHeight() - pY;//Node Coords 0 -> heights
 			nY = nY * (high - low) / handler.getHeight() + low;//Node Coords low -> high
 			
 			pY = pY * (highP - lowP) / handler.getHeight() + lowP;//Pixel Coords set to graph
 			
-			g.drawString(nY + "", x + 2, pY + 5);
-			g.drawLine(x - 2, pY, x + 2, pY);
+			//Capping digits
+			float cappednY = (int) (nY * 1000);
+			cappednY = cappednY / 1000;
+			
+			g.drawString(cappednY + "", x + 2, (int) pY + 5);
+			g.drawLine(x - 2, (int) pY, x + 2, (int) pY);
 		}
 		
 		for(Node node : nodes) {
@@ -74,6 +77,8 @@ public class NodeManager {
 			int pY = (int) (nY * spreadP / handler.getHeight() + lowP);//Ratio set to graph
 			
 			g.fillRect(x + 30, pY - 2, 4, 4);
+			g.drawLine(0, pY, x + 30, pY);
+			
 			g.drawString(node.getRatio() + "", x + 13, pY - 5);
 			g.drawString(node.getBits() + "", x + 15, pY + 17);
 		}
@@ -88,11 +93,4 @@ public class NodeManager {
 		this.nodes = nodes;
 	}
 	
-	public int getSpread() {
-		return spread;
-	}
-	
-	public int getSpreadP() {
-		return spreadP;
-	}
 }

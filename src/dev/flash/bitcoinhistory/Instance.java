@@ -78,9 +78,10 @@ public class Instance implements Runnable {
 		float mouseY = mouseManager.getMouseY();
 		float height = handler.getHeight();
 		float convertedMouseY = mouseY/height;
+		float scale = (camera.getHigh()-camera.getLow())/30;
 		
-		camera.setHigh(camera.getHigh()+10*convertedMouseY*scrollAmount);
-		camera.setLow(camera.getLow()-10*(1-convertedMouseY)*scrollAmount);
+		camera.setHigh(camera.getHigh()+scale*convertedMouseY*scrollAmount);
+		camera.setLow(camera.getLow()-scale*(1-convertedMouseY)*scrollAmount);
 		
 		mouseManager.setWheelRotation(0);
 	}
