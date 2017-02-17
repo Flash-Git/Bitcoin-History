@@ -11,6 +11,7 @@ public class NodeManager {
 	private Handler handler;
 	private ArrayList<Node> nodes = new ArrayList<>();
 	private Camera camera;
+	private int spread, spreadP;
 	
 	public NodeManager(Handler handler) {
 		this.handler = handler;
@@ -34,40 +35,47 @@ public class NodeManager {
 	}
 	
 	public void render(Graphics g) {
-		int x = 0;
+		int x = 15;
 		
 		int lines = 25;
 		
-		int low = (int)camera.getLow();
-		int high = (int)camera.getHigh();
-		int spread = high - low;
+		int low = (int) camera.getLow();
+		int high = (int) camera.getHigh();
+		spread = high - low;
 		
 		int lowP = 15;
 		int highP = handler.getHeight() - 30;
-		int spreadP = highP - lowP;
+		spreadP = highP - lowP;
 		
-		g.drawLine(15, highP, 15, lowP);
+		g.drawLine(15, lowP, 15, highP);
 		
-		for(int i = 0; i < lines+1; i++) {
-			g.drawString(handler.getHeight() / spreadP * spread - (spread / (lines) * i) + low + "", 16, spreadP / (lines) * i + lowP + 5);
-			//g.drawString("fu", 15, spread / spreadP * (i * lines) + highP);
-			g.drawLine(13, (highP - lowP) / (lines) * i + lowP, 17, (highP - lowP) / (lines) * i + lowP);
+		for(int i = 0; i < lines + 1; i++) {
+			int pY = i * handler.getHeight() / lines;//Pixel Coords height -> 0
+			
+			int nY = handler.getHeight() - pY;//Node Coords 0 -> heights
+			nY = nY * (high - low) / handler.getHeight() + low;//Node Coords low -> high
+			
+			pY = pY * (highP - lowP) / handler.getHeight() + lowP;//Pixel Coords set to graph
+			
+			g.drawString(nY + "", x + 2, pY + 5);
+			g.drawLine(x - 2, pY, x + 2, pY);
 		}
 		
 		for(Node node : nodes) {
+			x += 50;
+			
 			if(node.isBuy()) {
 				g.setColor(Color.GREEN);
 			} else {
 				g.setColor(Color.RED);
 			}
-			x += 50;
-			//int y = (int) (spreadP + lowP - (handler.getHeight() * - spreadP / spread + (node.getRatio() * spreadP / spread)));
 			
-			int y = (high - (int) node.getRatio())*spreadP/spread+lowP;
+			float nY = handler.getHeight() - (node.getRatio() - low) / spread * handler.getHeight();//Ratio from low -> high
+			int pY = (int) (nY * spreadP / handler.getHeight() + lowP);//Ratio set to graph
 			
-			g.drawRect(x + 30, y, 2, 2);
-			g.drawString(node.getRatio() + "", x + 13, y - 5);
-			g.drawString(node.getBits() + "", x + 15, y + 17);
+			g.fillRect(x + 30, pY - 2, 4, 4);
+			g.drawString(node.getRatio() + "", x + 13, pY - 5);
+			g.drawString(node.getBits() + "", x + 15, pY + 17);
 		}
 	}
 	
@@ -78,5 +86,13 @@ public class NodeManager {
 	
 	public void setNodes(ArrayList<Node> nodes) {
 		this.nodes = nodes;
+	}
+	
+	public int getSpread() {
+		return spread;
+	}
+	
+	public int getSpreadP() {
+		return spreadP;
 	}
 }
