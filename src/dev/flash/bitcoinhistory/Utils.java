@@ -25,4 +25,14 @@ public class Utils {
 			return false;
 		}
 	}
+	public static boolean parseBuySell(String buySell) {
+		if(buySell.equals("Buy")){
+			return true;
+		}
+		if(buySell.equals("Sell")){
+			return false;
+		}
+		System.out.println(buySell + " FUCKED ");
+		return false;
+	}
 }

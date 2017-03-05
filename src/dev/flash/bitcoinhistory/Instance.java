@@ -63,7 +63,7 @@ public class Instance implements Runnable {
 		handler.setCamera(camera = new Camera(0, 700, 600, 870));
 		
 		nodeManager = new NodeManager(handler);
-		nodeManager.setNodes(NodeLoader.readNodes("res/files/file.txt"));
+		nodeManager.setNodes(NodeLoader.readCoinFloorNodes("res/files/coinfloorFile.txt"));
 	}
 	
 	private void tick(double delta) {
