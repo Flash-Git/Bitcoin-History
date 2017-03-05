@@ -34,7 +34,7 @@ public class NodeManager {
 	}
 	
 	public void render(Graphics g) {
-		int x = 15;
+		float x = 15;
 		
 		int lines = 25;
 		
@@ -60,9 +60,11 @@ public class NodeManager {
 			float cappednY = (int) (nY * 1000);
 			cappednY = cappednY / 1000;
 			
-			g.drawString(cappednY + "", x + 2, (int) pY + 5);
-			g.drawLine(x - 2, (int) pY, x + 2, (int) pY);
+			g.drawString(cappednY + "", (int)x + 2, (int) pY + 5);
+			g.drawLine((int)x - 2, (int) pY, (int)x + 2, (int) pY);
 		}
+		
+		x = camera.getX();
 		
 		for(Node node : nodes) {
 			x += 50;
@@ -76,11 +78,11 @@ public class NodeManager {
 			float nY = handler.getHeight() - (node.getRatio() - low) / spread * handler.getHeight();//Ratio from low -> high
 			int pY = (int) (nY * spreadP / handler.getHeight() + lowP);//Ratio set to graph
 			
-			g.fillRect(x + 30, pY - 2, 4, 4);
-			g.drawLine(0, pY, x + 30, pY);
+			g.fillRect((int)x + 30, pY - 2, 4, 4);
+			//g.drawLine(0, pY, x + 30, pY);
 			
-			g.drawString(node.getRatio() + "", x + 13, pY - 5);
-			g.drawString(node.getBits() + "", x + 15, pY + 17);
+			g.drawString(node.getRatio() + "", (int)x + 13, pY - 5);
+			g.drawString(node.getBits() + "", (int)x + 15, pY + 17);
 		}
 	}
 	

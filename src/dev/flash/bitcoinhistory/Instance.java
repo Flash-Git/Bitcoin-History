@@ -67,21 +67,40 @@ public class Instance implements Runnable {
 	}
 	
 	private void tick(double delta) {
-		keyManager.updateKeys();//TODO this is more of a failsafe than actually necessary
 		nodeManager.tick();
+		handleScrolling(delta);
 		
+		float newdelta = (float) (delta / 1000 * 60);
+		
+		if(keyManager.left) {
+			camera.setX(camera.getX() + 5 * newdelta);
+		}
+		if(keyManager.right) {
+			camera.setX(camera.getX() - 5 * newdelta);
+		}
+		if(keyManager.up) {
+			camera.setHigh(camera.getHigh() + 3.5f * newdelta);
+			camera.setLow(camera.getLow() + 3.5f * newdelta);
+		}
+		if(keyManager.down) {
+			camera.setHigh(camera.getHigh() - 7 * newdelta);
+			camera.setLow(camera.getLow() - 7 * newdelta);
+		}
+	}
+	
+	private void handleScrolling(double delta) {
 		int scrollAmount;
 		
-		if((scrollAmount = (int) mouseManager.getWheelRotation()) ==0)
+		if((scrollAmount = (int) mouseManager.getWheelRotation()) == 0)
 			return;
 		
 		float mouseY = mouseManager.getMouseY();
 		float height = handler.getHeight();
-		float convertedMouseY = mouseY/height;
-		float scale = (camera.getHigh()-camera.getLow())/30;
+		float convertedMouseY = mouseY / height;
+		float scale = (camera.getHigh() - camera.getLow()) / 30;
 		
-		camera.setHigh(camera.getHigh()+scale*convertedMouseY*scrollAmount);
-		camera.setLow(camera.getLow()-scale*(1-convertedMouseY)*scrollAmount);
+		camera.setHigh(camera.getHigh() + scale * convertedMouseY * scrollAmount);
+		camera.setLow(camera.getLow() - scale * (1 - convertedMouseY) * scrollAmount);
 		
 		mouseManager.setWheelRotation(0);
 	}
