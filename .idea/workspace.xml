@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab2a19bf-9126-4712-a0b0-922747764a22" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dev/flash/bitcoinhistory/Instance.java" afterPath="$PROJECT_DIR$/src/dev/flash/bitcoinhistory/Instance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dev/flash/bitcoinhistory/NodeManager.java" afterPath="$PROJECT_DIR$/src/dev/flash/bitcoinhistory/NodeManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dev/flash/bitcoinhistory/input/KeyManager.java" afterPath="$PROJECT_DIR$/src/dev/flash/bitcoinhistory/input/KeyManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +21,8 @@
       <file leaf-file-name="Instance.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/dev/flash/bitcoinhistory/Instance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="85" column="48" lean-forward="false" selection-start-line="85" selection-start-column="48" selection-end-line="85" selection-end-column="48" />
+            <state relative-caret-position="494">
+              <caret line="118" column="48" lean-forward="false" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -699,15 +696,15 @@
       <workItem from="1487153870743" duration="59792000" />
       <workItem from="1487341461045" duration="2584000" />
       <workItem from="1488669241098" duration="826000" />
-      <workItem from="1488721167104" duration="3456000" />
+      <workItem from="1488721167104" duration="5818000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68642000" />
+    <option name="totallyTimeSpent" value="71004000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1298,8 +1295,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dev/flash/bitcoinhistory/Instance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="85" column="48" lean-forward="false" selection-start-line="85" selection-start-column="48" selection-end-line="85" selection-end-column="48" />
+        <state relative-caret-position="494">
+          <caret line="118" column="48" lean-forward="false" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

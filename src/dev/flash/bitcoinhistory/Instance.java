@@ -5,6 +5,7 @@ import dev.flash.bitcoinhistory.input.MouseManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 /**
  * Created by Flash on 15/02/2017.
@@ -64,6 +65,37 @@ public class Instance implements Runnable {
 		
 		nodeManager = new NodeManager(handler);
 		nodeManager.setNodes(NodeLoader.readCoinFloorNodes("res/files/coinfloorFile.txt"));
+		
+		ArrayList<Node> buyNodes = new ArrayList<>();
+		ArrayList<Node> sellNodes = new ArrayList<>();
+		for(Node node : nodeManager.getNodes()) {
+			if(node.isBuy()) {
+				buyNodes.add(node);
+			} else {
+				sellNodes.add(node);
+			}
+		}
+		float totalBuyBits = 0;
+		float totalBuyPounds = 0;
+		float totalSellBits = 0;
+		float totalSellPounds = 0;
+		
+		for(Node node : buyNodes) {
+			totalBuyBits += node.getBits();
+			totalBuyPounds += node.getPounds();
+		}
+		for(Node node : sellNodes) {
+			totalSellBits += node.getBits();
+			totalSellPounds += node.getPounds();
+		}
+		System.out.println("totalBuyBits: " + totalBuyBits + ", totalBuyPounds: " + totalBuyPounds + ", totalSellBits: " + totalSellBits + ", totalSellPounds: " + totalSellPounds);
+		
+		float averageBuyBits = totalBuyBits/buyNodes.size();
+		float averageSellBits = totalSellBits/buyNodes.size();
+		
+		float averageBuyPounds = totalBuyPounds/sellNodes.size();
+		float averageSellPounds = totalSellPounds/sellNodes.size();
+		System.out.println("averageBuyBits: " + averageBuyBits + ", averageSellBits: " + averageSellBits + ", averageBuyPounds: " + averageBuyPounds + ", averageSellPounds: " + averageSellPounds);
 	}
 	
 	private void tick(double delta) {
@@ -73,18 +105,18 @@ public class Instance implements Runnable {
 		float newdelta = (float) (delta / 1000 * 60);
 		
 		if(keyManager.left) {
-			camera.setX(camera.getX() + 5 * newdelta);
+			camera.setX(camera.getX() + 7 * newdelta);
 		}
 		if(keyManager.right) {
-			camera.setX(camera.getX() - 5 * newdelta);
+			camera.setX(camera.getX() - 7 * newdelta);
 		}
 		if(keyManager.up) {
 			camera.setHigh(camera.getHigh() + 3.5f * newdelta);
 			camera.setLow(camera.getLow() + 3.5f * newdelta);
 		}
 		if(keyManager.down) {
-			camera.setHigh(camera.getHigh() - 7 * newdelta);
-			camera.setLow(camera.getLow() - 7 * newdelta);
+			camera.setHigh(camera.getHigh() - 3.5f * newdelta);
+			camera.setLow(camera.getLow() - 3.5f * newdelta);
 		}
 	}
 	
