@@ -10,9 +10,7 @@ public class KeyManager implements KeyListener {
     private boolean[] keys;
 
     public boolean up, down, left, right, c, m, p, r, b, e, space;
-
-    private Handler handler;
-
+	
     public KeyManager() {
         keys = new boolean[256];
     }
@@ -61,7 +59,4 @@ public class KeyManager implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
-    public void setHandler(Handler handler) {
-        this.handler = handler;
-    }
 }

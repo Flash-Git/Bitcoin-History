@@ -6,10 +6,10 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     private boolean leftPressed, rightPressed;
     private int mouseX, mouseY;
-    private boolean mouseWheelUp, mouseWheelDown;
 	private float wheelRotation;
 	
     public MouseManager() {
+    	
     }
 
     // Implemented methods
@@ -87,14 +87,6 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
     public int getMouseY() {
         return mouseY;
     }
-	
-	public boolean isMouseWheelUp() {
-		return mouseWheelUp;
-	}
-	
-	public boolean isMouseWheelDown() {
-		return mouseWheelDown;
-	}
 	
 	public float getWheelRotation() {
 		return wheelRotation;
