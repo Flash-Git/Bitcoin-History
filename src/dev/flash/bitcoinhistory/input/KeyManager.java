@@ -1,7 +1,5 @@
 package dev.flash.bitcoinhistory.input;
 
-import dev.flash.bitcoinhistory.Handler;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
